@@ -15,6 +15,7 @@
 
 		<app.runtime>4.3.0</app.runtime>
 		<mule.maven.plugin.version>3.5.1</mule.maven.plugin.version>
+		<munit.version>2.3.4</munit.version>
 	</properties>
 
 	<build>
@@ -29,45 +30,66 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
-			    <configuration>
-				</configuration>
+				<configuration/>
 			</plugin>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
-			<configuration>
-				</configuration>
+				<configuration/>
 			</plugin>
 			<plugin>
-			<groupId>org.mule.tools.maven</groupId>
+				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
-				<configuration> 
-        <cloudHubDeployment> 
-          <muleVersion>${app.runtime}</muleVersion> 
-          <username>gouse7866</username> 
-          <password>Gousekgm1</password> 
-          <environment>Sandbox</environment> 
-          <!-- <region>eu-central-1</region>  -->
-          <objectStoreV2>true</objectStoreV2>
-          <uri>https://anypoint.mulesoft.com</uri>; 
-          <applicationName>muledemotest12</applicationName>
-          <workerType>MICRO</workerType>
-          <workers>1</workers> 
-        </cloudHubDeployment> 
-      </configuration> 
-      <executions> 
-        <execution> 
-          <id>deploy</id> 
-          <phase>deploy</phase> 
-          <goals> 
-            <goal>deploy</goal> 
-          </goals> 
-        </execution> 
-      </executions> 
-				</plugin>
+				<configuration>
+					<cloudHubDeployment>
+						<muleVersion>${app.runtime}</muleVersion>
+						<username>gouse7866</username>
+						<password>Gousekgm1</password>
+						<environment>Sandbox</environment>
+						<!-- <region>eu-central-1</region>  -->
+						<objectStoreV2>true</objectStoreV2>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<applicationName>muledemotest12</applicationName>;
+						<workerType>MICRO</workerType>
+						<workers>1</workers>
+					</cloudHubDeployment>
+				</configuration>
+				<executions>
+					<execution>
+						<id>deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.mulesoft.munit.tools</groupId>
+				<artifactId>munit-maven-plugin</artifactId>
+				<version>${munit.version}</version>
+				<executions>
+					<execution>
+						<id>test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+							<goal>coverage-report</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<coverage>
+						<runCoverage>true</runCoverage>
+						<formats>
+							<format>html</format>
+						</formats>
+					</coverage>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -83,6 +105,26 @@
 			<artifactId>mule-sockets-connector</artifactId>
 			<version>1.2.1</version>
 			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.mulesoft.munit</groupId>
+			<artifactId>munit-runner</artifactId>
+			<version>2.3.4</version>
+			<classifier>mule-plugin</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mulesoft.munit</groupId>
+			<artifactId>munit-tools</artifactId>
+			<version>2.3.4</version>
+			<classifier>mule-plugin</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.weave</groupId>
+			<artifactId>assertions</artifactId>
+			<version>1.0.2</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
